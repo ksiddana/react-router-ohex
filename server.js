@@ -15,10 +15,10 @@ const mysql = require('mysql');
     debug    :  false
 });*/
 
-
+let connection;
 
 if (process.env.NODE_ENV !== 'production') {
-  let connection;
+
   connection = mysql.createPool({
     connectionLimit : 100, //important
     // host     : databaseConfig.test.host,
