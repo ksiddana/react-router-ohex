@@ -1,26 +1,43 @@
-const NODE_ENV = process.env.NODE_ENV;
-// const dotenv = require('dotenv');
+var webpack = require('webpack');
+var path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const webpack = require('webpack');
-const fs      = require('fs');
-const path    = require('path'),
-      join    = path.join,
-      resolve = path.resolve;
+const VENDOR_LIBS = [
+  'react', 'lodash', 'redux', 'react-redux', 'react-dom',
+  'faker', 'react-input-range', 'redux-form', 'redux-thunk'
+];
 
-const getConfig = require('hjs-webpack');
-
-const isDev  = NODE_ENV === 'development';
-const isTest = NODE_ENV === 'test';
-
-const root    = resolve(__dirname);
-const src     = join(root, 'src');
-const modules = join(root, 'node_modules');
-const dest    = join(root, 'dist');
-
-var config = getConfig({
-  in: join(src, 'app.js'),
-  out: dest,
-  clearBeforeBuild: true
-})
-
-module.exports = config;
+module.exports = {
+  entry: {
+    bundle: './src/index.js',
+    vendor: VENDOR_LIBS
+  },
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: '[name].bundle.js'
+  },
+  module: {
+    rules: [
+      {
+        use: 'babel-loader',
+        test: /\.js$/,
+        exclude: /node_modules/
+      },
+      {
+        use: ['style-loader', 'css-loader'],
+        test: /\.css$/
+      }
+    ]
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['vendor', 'manifest']
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/index.html'
+    })
+  ]
+};

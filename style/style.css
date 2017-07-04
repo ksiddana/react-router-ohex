@@ -1,0 +1,144 @@
+body {
+  /*background-color: #8b969c;*/
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3 {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 15px;
+}
+
+.input-field label {
+  left: 0;
+}
+
+.range-slider {
+  margin: 65px 0 30px;
+}
+
+.range-slider label {
+  top: -37px;
+}
+
+label {
+  color: white !important;
+}
+
+.pagination li > a {
+  cursor: pointer;
+}
+
+.pagination {
+  margin-bottom: 5px;
+}
+
+a.secondary-content {
+  position: relative !important;
+  flex: 1;
+  text-align: right;
+  top: 0px !important;
+  right: 0px !important;
+}
+
+.secondary-content .material-icons {
+  font-size: 36px;
+}
+
+.artist-detail .header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-around;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.album img {
+  width: 250px !important;
+}
+
+.has-error {
+  color: red;
+}
+
+.spacer a {
+  margin: 0px 10px;
+  cursor: pointer;
+}
+
+li.collection-item.avatar {
+  display: flex;
+  align-items: center;
+  padding-left: 10px !important;
+}
+
+li.collection-item.avatar img {
+  position: relative !important;
+  left: 0px !important;
+  margin: 0px 10px !important;
+}
+
+.retired {
+  background-color: #ddd !important;
+}
+
+.select {
+  font-size: 1rem;
+}
+
+select {
+  display: block !important;
+  margin-bottom: 10px;
+  height: 30px;
+  color: black;
+}
+
+ul.header li {
+
+  display: inline;
+  list-style-type: none;
+  margin: 5px;
+}
+ul.header {
+  background-color: #90d7ea;
+  padding: 10px;
+}
+ul.header li a {
+  color: #FFF;
+  text-decoration: none;
+  display: inline-block;
+}
+.content {
+  background-color: #FFF;
+}
+.content h1 {
+  padding-left: 20px;
+  margin: 0;
+}
+.content li {
+  margin-bottom: 10px;
+}
+
+.title {
+  padding-left: 15px;
+}
+
+.nav-bar {
+  padding: 10px 0 10px 0;
+  background-color: #E6E6E6;
+  font-family: "Cabin","Helvetica Neue",Helvetica, Arial, sans-serif;
+}
+
+.nav-bar li {
+  display: inline-block;
+}
+
+.nav-bar li a {
+  padding-left: 10px;
+}
