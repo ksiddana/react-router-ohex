@@ -5,6 +5,7 @@ import ArtistsReducer from './ArtistsReducer';
 import ErrorReducer from './ErrorReducer';
 import SelectionReducer from './SelectionReducer';
 import FoodItemReducer from './FoodItems.js';
+import ReminderProReducer from './ReminderProReducer';
 
 export default combineReducers({
   form: formReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   artists: ArtistsReducer,
   errors: ErrorReducer,
   selection: SelectionReducer,
-  foodData: FoodItemReducer
+  foodData: FoodItemReducer,
+  reminders: ReminderProReducer
 });

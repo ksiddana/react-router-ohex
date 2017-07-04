@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Home from './components/Home';
 import FoodChart from './components/FoodChart.js';
 import ArtistMain from './components/artists/ArtistMain';
-import Countdown from './components/countdown-components/countdown'
+import Countdown from './components/countdown/countdown'
+import ReminderPro from './components/reminder-pro/reminder-pro';
 
 const componentRoutes = {
   component: Home,
@@ -44,6 +45,7 @@ const Routes = () => {
             <li><Link to="/">Home</Link></li>
             <li><Link to="/foodchart">Food Chart</Link></li>
             <li><Link to="/countdown">Countdown</Link></li>
+            <li><Link to="/reminderpro">ReminderPro</Link></li>
             <li><a href="https://bitbucket.org/" target="_blank">Bitbucket</a></li>
             <li><a href="https://tree.taiga.io" target="_blank">Tagia</a></li>
             <li><a href="https://id.heroku.com/login" target="_blank">Heroku</a></li>
@@ -54,6 +56,7 @@ const Routes = () => {
         <Route exact path='/' component={Home} />
         <Route path='/foodchart' component={FoodChart} />
         <Route path='/countdown' component={Countdown} />
+        <Route path='/reminderpro' component= {ReminderPro} />
       </div>
     </Router>
   );

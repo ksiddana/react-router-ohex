@@ -15,8 +15,8 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-  console.log("STATE OF THE ARTIST REDUCER", state);
-  console.log("STATE OF THE ACTION PAYLOAD", action);
+  // console.log("STATE OF THE ARTIST REDUCER", state);
+  // console.log("STATE OF THE ACTION PAYLOAD", action);
   switch (action.type) {
     case FETCH_FOOD_ITEMS:
       return _.extend({}, state, { foodItems: action.payload });

@@ -21,7 +21,7 @@ if (process.env.NODE_ENV !== 'production') {
   let connection;
   connection = mysql.createPool({
     connectionLimit : 100, //important
-    host     : databaseConfig.test.host,
+    // host     : databaseConfig.test.host,
     user     : databaseConfig.test.username,
     // password : databaseConfig.test.password,
     database : databaseConfig.test.database,
@@ -86,8 +86,8 @@ const webpackMiddleware = require('webpack-dev-middleware');
   const webpackConfig = require('./webpack.config.js');
   app.use(webpackMiddleware(webpack(webpackConfig)));
 
-  app.listen(8080);
-  console.log('DEV ENV Listening at:', 8080);
+  app.listen(4000);
+  console.log('DEV ENV Listening at:', 4000);
 
 } else {
   const static_path = path.join(__dirname, 'dist');

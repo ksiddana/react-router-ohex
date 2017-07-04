@@ -19,3 +19,7 @@
   width: 300px;
   margin: 5px;
 }
+
+.form-inline {
+  text-align: center;
+}

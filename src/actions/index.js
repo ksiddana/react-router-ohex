@@ -14,7 +14,9 @@ import {
   DESELECT_ARTIST,
   SELECT_ARTIST,
   RESET_SELECTION,
-  FETCH_FOOD_ITEMS
+  FETCH_FOOD_ITEMS,
+  ADD_REMINDER,
+  DELETE_REMINDER
 } from './types';
 
 import GetAgeRange from '../../database/queries/GetAgeRange';
@@ -34,14 +36,32 @@ export function fetchFoodItems() {
 
     return axios.get(url)
     .then(response => {
-      console.log("All FOOD ITEMS:", response);
+      // console.log("All FOOD ITEMS:", response);
       dispatch({ type: FETCH_FOOD_ITEMS, payload: response.data });
     })
     .catch(error => {
-      console.log("<ERROR:>", error);
+      // console.log("<ERROR:>", error);
     });
   };
 };
+
+export const addReminder = (text) => {
+  const action = {
+    type: ADD_REMINDER,
+    text: text
+  }
+  console.log("action {} in addReminder ", action);
+  return action;
+}
+
+export const deleteReminder = (id) => {
+  const action = {
+    type: DELETE_REMINDER,
+    id: id
+  }
+  console.log("Deleting in action {}", action);
+  return action;
+}
 
 export const resetArtist = () => {
   return { type: RESET_ARTIST };
