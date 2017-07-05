@@ -1,4 +1,5 @@
 .reminder-pro {
+  /*width: 480px;*/
   padding-top: 20px;
   display: flex;
   flex-direction: column;
@@ -11,10 +12,21 @@
   font-size: 24px;
 }
 
-.list-group {
-  padding: 5px;
-}
-
 .list-group > li {
   margin: 2px;
+}
+
+.list-item {
+  display: inline-block;
+}
+
+.delete-button {
+  float: right;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.reminder-pro-button {
+  display: inherit;
+  margin: 15px auto;
 }

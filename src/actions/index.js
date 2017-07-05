@@ -16,7 +16,8 @@ import {
   RESET_SELECTION,
   FETCH_FOOD_ITEMS,
   ADD_REMINDER,
-  DELETE_REMINDER
+  DELETE_REMINDER,
+  CLEAR_REMINDERS
 } from './types';
 
 import GetAgeRange from '../../database/queries/GetAgeRange';
@@ -45,10 +46,11 @@ export function fetchFoodItems() {
   };
 };
 
-export const addReminder = (text) => {
+export const addReminder = (text, dueDate) => {
   const action = {
     type: ADD_REMINDER,
-    text: text
+    text: text,
+    dueDate
   }
   console.log("action {} in addReminder ", action);
   return action;
@@ -61,6 +63,12 @@ export const deleteReminder = (id) => {
   }
   console.log("Deleting in action {}", action);
   return action;
+}
+
+export const clearReminders = () => {
+  return {
+    type: CLEAR_REMINDERS
+  }
 }
 
 export const resetArtist = () => {
