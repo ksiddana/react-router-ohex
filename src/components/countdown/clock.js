@@ -17,32 +17,29 @@ class Clock extends Component {
   }
 
   componentDidMount() {
-    setInterval( () => this.getTimeUntil(this.props.deadline), 1000);
+    const intervalId = setInterval(() => this.getTimeUntil(this.props.deadline), 1000);
+    this.setState({intervalId: intervalId});
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.intervalId);
+  }
+
+  leadingZero(num) {
+    return num < 10 ? '0' + num : num;
   }
 
   getTimeUntil(deadline) {
     const time = Date.parse(deadline) - Date.parse(new Date());
-    // console.log("time", time);
     const seconds = Math.floor((time/1000) % 60);
     const minutes = Math.floor((time/1000/60) % 60);
     const hours = Math.floor(time/(1000 * 3600) % 24);
     const days = Math.floor(time/(1000 * 3600 * 24));
 
-    // console.log("Days: ", days, " Hours: ", hours, " Minutes: ", minutes, " Seconds: ", seconds);
-    // this.setState({days: days, hours: hours, minutes: minutes, seconds: seconds});
     this.setState({days, hours, minutes, seconds});
   }
 
-  leadingZero(num) {
-    /*if (num < 10) {
-      return '0' + num;
-    }
-    return num;*/
-    return num < 10 ? '0' + num : num;
-  }
-
   render() {
-
     return (
       <div className="time">
         <div className="days">{this.leadingZero(this.state.days)} days</div>

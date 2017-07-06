@@ -10,8 +10,10 @@ class ReminderPro extends Component {
     super(props);
     this.state = {
       text: '',
-      dueDate: ''
+      dueDate: new Date()
     }
+
+    console.log("this.state:", this.state);
   }
 
   addReminder() {
@@ -28,7 +30,7 @@ class ReminderPro extends Component {
   renderReminders() {
     const { reminders } = this.props;
     return (
-      <ul className="list-group col-sm-4">
+      <ul className="list-group">
         {
           reminders.map(reminder => {
             return (
@@ -69,7 +71,7 @@ class ReminderPro extends Component {
           <input
             className="form-control"
             type="datetime-local"
-            onChange={event => this.setState({dueDate: new Date().toLocalString()})}
+            onChange={event => this.setState({dueDate: event.target.value})}
           />
 
           <button
