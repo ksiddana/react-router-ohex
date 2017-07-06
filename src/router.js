@@ -1,11 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 
 import Home from './components/Home';
-import FoodChart from './components/FoodChart.js';
+import TabComponent from './components/tab-panel.js';
 import ArtistMain from './components/artists/ArtistMain';
-import Countdown from './components/countdown/countdown'
-import ReminderPro from './components/reminder-pro/reminder-pro';
 
 const componentRoutes = {
   component: Home,
@@ -42,21 +40,16 @@ const Routes = () => {
       <div>
         <div className="nav-bar">
           <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/foodchart">Food Chart</Link></li>
-            <li><Link to="/countdown">Countdown</Link></li>
-            <li><Link to="/reminderpro">ReminderPro</Link></li>
+            <li><Link to="/">React Apps</Link></li>
+            <li><Link to="/tabcomponent">Tab Panel</Link></li>
             <li><a href="https://bitbucket.org/" target="_blank">Bitbucket</a></li>
             <li><a href="https://tree.taiga.io" target="_blank">Tagia</a></li>
             <li><a href="https://id.heroku.com/login" target="_blank">Heroku</a></li>
         </ul>
         </div>
-
-        <hr/>
-        <Route exact path='/' component={Home} />
-        <Route path='/foodchart' component={FoodChart} />
-        <Route path='/countdown' component={Countdown} />
-        <Route path='/reminderpro' component= {ReminderPro} />
+        <Route exact path='/' component={TabComponent} />
+        <Redirect from="*" to="/" />
+        <Route path='/tabcomponent' component={ArtistMain} />
       </div>
     </Router>
   );
