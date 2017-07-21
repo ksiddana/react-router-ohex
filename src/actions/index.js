@@ -17,7 +17,8 @@ import {
   FETCH_FOOD_ITEMS,
   ADD_REMINDER,
   DELETE_REMINDER,
-  CLEAR_REMINDERS
+  CLEAR_REMINDERS,
+  GET_GITHUB_USER_DATA
 } from './types';
 
 import GetAgeRange from '../../database/queries/GetAgeRange';
@@ -30,6 +31,7 @@ import DeleteArtist from '../../database/queries/DeleteArtist';
 import SetRetired from '../../database/queries/SetRetired';
 import SetNotRetired from '../../database/queries/SetNotRetired';
 
+/* OHEx Foot Items Reducer */
 
 export function fetchFoodItems() {
   return dispatch => {
@@ -46,13 +48,37 @@ export function fetchFoodItems() {
   };
 };
 
+/* Github User Data */
+
+export const getUserData = (url) => {
+  console.log("Step 5. Inside getUserData Actions Props Method:", url);
+  return dispatch => {
+    return fetchJSONP(url).then(response => {
+      return response.json();
+    }).then(
+      request => {
+        const githubData = request.data;
+        console.log("Step 6. Fetching Github API Data: ", githubData);
+        dispatch({
+          type: GET_GITHUB_USER_DATA,
+          payload: githubData
+        });
+      },
+      error => {
+        console.log("Error: Retrieving API call", error);
+      });
+  }
+};
+
+/* Reminder Pro Reducers */
+
 export const addReminder = (text, dueDate) => {
   const action = {
     type: ADD_REMINDER,
     text: text,
     dueDate
   }
-  console.log("action {} in addReminder ", action);
+  // console.log("action {} in addReminder ", action);
   return action;
 }
 
@@ -61,7 +87,7 @@ export const deleteReminder = (id) => {
     type: DELETE_REMINDER,
     id: id
   }
-  console.log("Deleting in action {}", action);
+  // console.log("Deleting in action {}", action);
   return action;
 }
 
@@ -70,6 +96,8 @@ export const clearReminders = () => {
     type: CLEAR_REMINDERS
   }
 }
+
+/* Artists Reducers from Stephen Grider */
 
 export const resetArtist = () => {
   return { type: RESET_ARTIST };

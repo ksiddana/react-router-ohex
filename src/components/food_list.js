@@ -39,7 +39,7 @@ import * as actions from '../actions';
 class FoodItems extends Component {
   constructor(props) {
     super(props);
-    console.log("PROPS inside FoodItems Component Constructor", props);
+    // console.log("PROPS inside FoodItems Component Constructor", props);
     this.state = {
       foodItems: [
         {
@@ -69,7 +69,7 @@ class FoodItems extends Component {
   }
 
   render() {
-    console.log("PROPS inside FoodItems Component", this.props);
+    // console.log("PROPS inside FoodItems Component", this.props);
     return (
       <div>
         <p>Pull Food Items Data from Database</p>
@@ -91,7 +91,7 @@ class FoodItems extends Component {
 };
 
 const mapStateToProps = ((state) => {
-  console.log("STATE Parameter from the mapStateToProps", state);
+  // console.log("STATE Parameter from the mapStateToProps", state);
   return {
     foodItems: state.foodData.foodItems
   };

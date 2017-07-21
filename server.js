@@ -105,4 +105,4 @@ app.get("/database/menu-items", function(req,res) {-
   getAllMenuItems(req, res);
 });
 
-app.get('/hello', (req, res) => res.send({ hi: 'there' }));
+app.get('/hello/me', (req, res) => res.send({ hi: 'there' }));

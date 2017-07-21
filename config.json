@@ -1,12 +1,10 @@
 {
   "development": {
-    "username": "",
+    "username": "root",
     "password": "",
-    "database": "heroku_0290dbccabb07ee",
-    "host": "us-cdbr-iron-east-03.cleardb.net",
-    "dialect": "mysql",
-    "seederStorage": "sequelize",
-    "define": { "timestamps": false}
+    "database": "ohex_prod",
+    "host": "127.0.01",
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",

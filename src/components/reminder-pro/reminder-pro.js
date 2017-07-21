@@ -10,7 +10,7 @@ class ReminderPro extends Component {
     super(props);
     this.state = {
       text: '',
-      dueDate: new Date()
+      dueDate: moment(new Date())
     }
 
     console.log("this.state:", this.state);
@@ -30,7 +30,7 @@ class ReminderPro extends Component {
   renderReminders() {
     const { reminders } = this.props;
     return (
-      <ul className="list-group">
+      <ul className="list-group col-sm-4">
         {
           reminders.map(reminder => {
             return (
