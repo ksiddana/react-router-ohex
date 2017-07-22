@@ -6,7 +6,7 @@ import ErrorReducer from './ErrorReducer';
 import SelectionReducer from './SelectionReducer';
 import FoodItemReducer from './FoodItems.js';
 import ReminderProReducer from './ReminderProReducer';
-import GithubReducer from "./GithubReducer";
+import GithubStateReducer from "./GithubReducer";
 
 export default combineReducers({
   form: formReducer,
@@ -16,5 +16,5 @@ export default combineReducers({
   selection: SelectionReducer,
   foodData: FoodItemReducer,
   reminders: ReminderProReducer,
-  githubData: GithubReducer
+  githubState: GithubStateReducer
 });

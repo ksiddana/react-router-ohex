@@ -18,7 +18,8 @@ import {
   ADD_REMINDER,
   DELETE_REMINDER,
   CLEAR_REMINDERS,
-  GET_GITHUB_USER_DATA
+  GET_GITHUB_USER_DATA,
+  GET_GITHUB_USER_REPOS
 } from './types';
 
 import GetAgeRange from '../../database/queries/GetAgeRange';
@@ -51,21 +52,39 @@ export function fetchFoodItems() {
 /* Github User Data */
 
 export const getUserData = (url) => {
-  console.log("Step 5. Inside getUserData Actions Props Method:", url);
+  console.log("Step 5. getUserData Action Creator API call:", url);
   return dispatch => {
     return fetchJSONP(url).then(response => {
       return response.json();
     }).then(
       request => {
-        const githubData = request.data;
-        console.log("Step 6. Fetching Github API Data: ", githubData);
+        const githubAPI_Data = request.data;
+        console.log("Step 6. Fetching Github API Data: ", githubAPI_Data);
         dispatch({
           type: GET_GITHUB_USER_DATA,
-          payload: githubData
+          payload: githubAPI_Data
         });
       },
       error => {
         console.log("Error: Retrieving API call", error);
+      });
+  }
+};
+
+export const getUserRepos = (url) => {
+  return dispatch => {
+    return fetchJSONP(url).then(response => {
+      return response.json();
+    }).then(
+      request => {
+        const githubAPI_Repo = request.data;
+        dispatch({
+          type: GET_GITHUB_USER_REPOS,
+          payload: githubAPI_Repo
+        });
+      },
+      error => {
+        console.log("Error: Retrieving User API call", error);
       });
   }
 };
