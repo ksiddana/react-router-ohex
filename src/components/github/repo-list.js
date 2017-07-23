@@ -5,31 +5,42 @@ class RepoList extends React.Component {
   constructor(props) {
     super(props);
 
-    this._renderRepos = this._renderRepos.bind(this);
+    this.renderRepo = this.renderRepo.bind(this);
   }
 
-  _renderRepos() {
-    const { userRepos } = this.props;
-
-    if (userRepos) {
-      userRepos.map(() => { return <p>Repo Item</p>} );
-    } else {
-      return <div>Repos are missing</div>
+  renderRepo() {
+    console.log("INSIDE renderRepoMethod KARUN");
+    if (this.props.userRepos) {
+      console.log("INSIDE renderRepoMethod if Condition KARUNNEHA", this.props);
+      return this.props.userRepos.map(repo => { return <Repo repo={repo} /> });
     }
   }
 
   render() {
-
     return (
       <div>
         <ul className="list-group">
-          {this._renderRepos()}
-          <Repo {...this.props}/>
+          {
+            this.props.userRepos && this.props.userRepos.map(repo => {
+              return (
+                <div key={repo.id}><li className="list-group-item"><a href={repo.html_url}>{repo.name}</a> : {repo.description}</li></div>
+              );
+            })
+          }
+        </ul>
+        <ul className="list-group">
+          <div>
+            {this.props.userRepos && this.props.userRepos.map(repo => { return <Repo repo={repo} /> }) }
+          </div>
+        </ul>
+        <ul className="list-group">
+          {this.props.userRepos && this.renderRepo()}
         </ul>
       </div>
     );
   }
-
 }
+
+RepoList.defaultProps = {}
 
 export default RepoList;

@@ -3,19 +3,15 @@ import React from 'react';
 class Repo extends React.Component {
   constructor(props) {
     super(props);
-    console.log("INSIDE REPO COMPONENT", this.props);
   }
 
   render() {
     console.log("INSIDE REPO COMPONENT", this.props);
-    const {repo} = this.props.userRepos;
-
+    const {repo} = this.props;
+    console.log("INSIDE REPO COMPONENT", repo);
     return (
-      <div>
-        <li className="list-group-item">
-          <div>Repo</div>
-           {/* <a href={repo.html_url}> {repo.name}</a> : {repo.description} */}
-        </li>
+      <div key={repo.id}>
+        <li className="list-group-item"><a href={repo.html_url}>{repo.name}</a> : {repo.description}</li>
       </div>
     );
   }

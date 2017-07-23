@@ -72,6 +72,7 @@ export const getUserData = (url) => {
 };
 
 export const getUserRepos = (url) => {
+  console.log("Step 5. getUserRepos Action Creator API call:", url);
   return dispatch => {
     return fetchJSONP(url).then(response => {
       return response.json();

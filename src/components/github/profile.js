@@ -57,7 +57,7 @@ class Profile extends React.Component {
 
           <hr />
         <h3>User Repositories</h3>
-          {/* <RepoList userRepos={this.props.userRepos} /> */}
+          <RepoList {...this.props} />
         </div>
       </div>
     )
