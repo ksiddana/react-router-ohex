@@ -22,12 +22,12 @@ class Github extends Component {
 
   getUserData() {
     console.log("Step 4. Github Component Calling the getUserData Props method");
-    const url = 'http://api.github.com/users/' + this.state.username + '?client_id=' + this.props.clientId + '&client_secret=' + this.props.clientSecret;
+    const url = 'https://api.github.com/users/' + this.state.username + '?client_id=' + this.props.clientId + '&client_secret=' + this.props.clientSecret;
     this.props.getUserData(url);
   }
 
   getUserRepos() {
-    const url = 'http://api.github.com/users/' + this.state.username + '/repos?per_page=' + this.state.perPage + 'client_id=' + this.props.clientId + '&client_secret=' + this.props.clientSecret + '&sort=created';
+    const url = 'https://api.github.com/users/' + this.state.username + '/repos?per_page=' + this.state.perPage + 'client_id=' + this.props.clientId + '&client_secret=' + this.props.clientSecret + '&sort=created';
     this.props.getUserRepos(url);
   }
 
