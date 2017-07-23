@@ -57,6 +57,7 @@ class Github extends Component {
           <div className="row">
             <div className="col-md-12">
               <Search onFormSubmit={this.handleFormSubmit.bind(this)}/>
+              <br />
               <Profile {...this.props}/>
             </div>
           </div>

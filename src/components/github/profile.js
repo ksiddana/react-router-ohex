@@ -44,9 +44,9 @@ class Profile extends React.Component {
               <div className="row">
                 <div className="col-md-12">
                   <ul className="list-group">
-                    <li className="list-item"><strong>Username:</strong> {login}</li>
-                    <li className="list-item"><strong>Location:</strong> {location}</li>
-                    <li className="list-item"><strong>Company:</strong> {company}</li>
+                    <div><li className="list-group-item"><strong>Username:</strong> {login}</li></div>
+                    <div><li className="list-group-item"><strong>Location:</strong> {location}</li></div>
+                    <div><li className="list-group-item"><strong>Company:</strong> {company}</li></div>
                   </ul>
                 </div>
               </div>

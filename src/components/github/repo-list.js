@@ -9,12 +9,12 @@ class RepoList extends React.Component {
   }
 
   renderRepo() {
-    if (this.props.userRepos) {
+    if (this.props.userRepos.message !== 'Not Found' && this.props.userRepos) {
       return this.props.userRepos.map((repo, index) => {
         return (
           <div key={index}>
             <Repo repo={repo} />
-          </div> 
+          </div>
         );
       });
     }
@@ -29,6 +29,8 @@ class RepoList extends React.Component {
   }
 }
 
-RepoList.defaultProps = {}
+RepoList.defaultProps = {
+  userRepos: []
+}
 
 export default RepoList;
