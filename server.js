@@ -3,9 +3,12 @@ const express = require('express');
 const path = require('path');
 // const webpack = require('webpack');
 const app = express();
-const databaseConfig = require('./.config.json');
+// const databaseConfig = require('./.config.json');
+const databaseConfig = require('dotenv').config();
 const port = process.env.PORT || 3000;
 const mysql = require('mysql');
+
+console.log(".env file: ", databaseConfig);
 
 /*const connection = mysql.createPool({
     connectionLimit : 100, //important
@@ -19,7 +22,7 @@ const mysql = require('mysql');
 let connection;
 
 if (process.env.NODE_ENV !== 'production') {
-
+  const databaseConfig = require('./.config.json');
   connection = mysql.createPool({
     connectionLimit : 100, //important
     // host     : databaseConfig.test.host,
@@ -42,10 +45,10 @@ if (process.env.NODE_ENV !== 'production') {
   });
 } else {
   connection = mysql.createPool({
-    host     : databaseConfig.production.host,
-    user     : databaseConfig.production.username,
-    password : databaseConfig.production.password,
-    database : databaseConfig.production.database
+    host     : process.env.CLEAR_DB_HOST,
+    user     : process.env.CLEAR_DB_USERNAME,
+    password : process.env.CLEAR_DB_PASSWORD,
+    database : process.env.CLEAR_DB_DATABASE
   });
 
   connection.getConnection(function(error) {
