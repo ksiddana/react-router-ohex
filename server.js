@@ -3,9 +3,10 @@ const express = require('express');
 const path = require('path');
 // const webpack = require('webpack');
 const app = express();
-const databaseConfig = require('./config.json');
+const databaseConfig = require('./.config.json');
 const port = process.env.PORT || 3000;
 const mysql = require('mysql');
+
 /*const connection = mysql.createPool({
     connectionLimit : 100, //important
     host     : 'ohex.ddns.net',

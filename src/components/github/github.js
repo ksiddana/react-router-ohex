@@ -6,6 +6,9 @@ import { bindActionCreators } from 'redux';
 import Profile from './profile';
 import Search from './search-user';
 
+const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
+const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
+
 class Github extends Component {
   constructor(props) {
     super(props);
@@ -75,8 +78,8 @@ Github.PropTypes = {
 }
 
 Github.defaultProps = {
-  clientId: '839d4cfb190361af424f',
-  clientSecret: '5aa7447b7e607dfd58f83735112e8eaa1071d214'
+  clientId: GITHUB_CLIENT_ID,
+  clientSecret: GITHUB_CLIENT_SECRET
 }
 
 const mapStateToProps = (state) => {
