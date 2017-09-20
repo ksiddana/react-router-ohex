@@ -7,6 +7,7 @@ import SelectionReducer from './SelectionReducer';
 import FoodItemReducer from './FoodItems.js';
 import ReminderProReducer from './ReminderProReducer';
 import GithubStateReducer from "./GithubReducer";
+import DuckDuckGo from "./duckduckgo/duckduckgo";
 
 export default combineReducers({
   form: formReducer,
@@ -16,5 +17,6 @@ export default combineReducers({
   selection: SelectionReducer,
   foodData: FoodItemReducer,
   reminders: ReminderProReducer,
-  githubState: GithubStateReducer
+  githubState: GithubStateReducer,
+  duckduckgo: DuckDuckGo
 });

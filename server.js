@@ -105,7 +105,7 @@ const webpackMiddleware = require('webpack-dev-middleware');
 }
 
 // Server routes...
-app.get("/database/menu-items", function(req,res) {-
+app.get("/database", function(req,res) {-
   getAllMenuItems(req, res);
 });
 

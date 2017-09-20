@@ -5,6 +5,7 @@ import ReminderPro from './reminder-pro/reminder-pro';
 import OHEx from './food_list';
 import GoalCoach from "./goal-coach/goal-coach";
 import Github from "./github/github";
+import DuckDuckGo from "./duckduckgo/searchengine";
 
 const TabComponent = () => {
   return (
@@ -15,6 +16,7 @@ const TabComponent = () => {
         <Tab className="btn btn-info">Reminder Pro</Tab>
         <Tab className="btn btn-info">Goal Coach</Tab>
         <Tab className="btn btn-info">Github</Tab>
+        <Tab className="btn btn-info">Search</Tab>
       </TabList>
 
       <TabPanel>
@@ -35,6 +37,10 @@ const TabComponent = () => {
 
       <TabPanel>
         <Github />
+      </TabPanel>
+
+      <TabPanel>
+        <DuckDuckGo />
       </TabPanel>
     </Tabs>
   );
