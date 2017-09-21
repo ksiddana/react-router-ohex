@@ -30,8 +30,8 @@ class SearchEngine extends React.Component {
     // const { duckduckgo } = this.props
     const { text } = this.state;
     return (
-      <div>
-        <form className="well">
+      <div className="container">
+        <form className="well" onSubmit={this.searchItem.bind(this)}>
           <label>Search something ...</label>
           <input
             type="text"
@@ -41,13 +41,13 @@ class SearchEngine extends React.Component {
           />
           <Button
             bsStyle="primary"
-            onClick={this.searchItem}
+            onClick={this.searchItem.bind(this)}
           >Search</Button>
         </form>
 
         <div>
           {text ? <h2 className="page-header">Results</h2> : ""}
-          { 
+          {
             this.props.duckduckgo.results.map((result, index) => {
               return (
                 <Result result={result} key={index} />

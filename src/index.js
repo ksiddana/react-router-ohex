@@ -45,14 +45,3 @@ var Navigation = React.createClass({
 });
 
 ReactDOM.render(<App/>, document.getElementById('root'));
-
-/*ReactDOM.render(
-  <Router history={hashHistory}>
-    <Route path="/" component={Navigation}>
-      <IndexRoute component={Home} />
-      <Route path="database" component={Database} />
-      <Route path="hello" component={Maps} />
-    </Route>
-  </Router>,
-  document.getElementById('root')
-);*/

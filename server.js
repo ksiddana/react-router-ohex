@@ -1,9 +1,7 @@
 'use strict';
 const express = require('express');
 const path = require('path');
-// const webpack = require('webpack');
 const app = express();
-// const databaseConfig = require('./.config.json');
 const databaseConfig = require('dotenv').config();
 const port = process.env.PORT || 3000;
 const mysql = require('mysql');
@@ -80,12 +78,9 @@ function getAllMenuItems(req, res) {
   });
 }
 
-// app.use(bodyParser());
-// app.use(express.static(__dirname + '/../'));
-
 if (process.env.NODE_ENV !== 'production') {
 
-const webpackMiddleware = require('webpack-dev-middleware');
+  const webpackMiddleware = require('webpack-dev-middleware');
   const webpack = require('webpack');
   const webpackConfig = require('./webpack.config.js');
   app.use(webpackMiddleware(webpack(webpackConfig)));
