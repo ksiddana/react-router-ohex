@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getUserData, getUserRepos } from '../../actions';
+import { getUserData, getUserRepos, getUsers } from '../../actions';
 import { bindActionCreators } from 'redux';
 import Profile from './profile';
 import Search from './search-user';
 
-const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
-const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
+const GITHUB_CLIENT_ID = "839d4cfb190361af424f";
+const GITHUB_CLIENT_SECRET = "5aa7447b7e607dfd58f83735112e8eaa1071d214";
 
 class Github extends Component {
   constructor(props) {
@@ -36,8 +36,16 @@ class Github extends Component {
     this.props.getUserRepos(url);
   }
 
+  getUsers() {
+    const url = 'https://api.github.com/search/users?q=karun' + '&client_id=' + this.props.clientId + '&client_secret=' + this.props.clientSecret + '&sort=created';
+    console.log("URL: ", url);
+
+    this.props.getUsers(url);
+  }
+
   handleFormSubmit(username) {
     this.setState({username: username}, function() {
+      this.getUsers();
       this.getUserData();
       this.getUserRepos();
     });
@@ -93,7 +101,7 @@ const mapStateToProps = (state) => {
 }
 
 function mapDispatchToProps(dispatch) {
-	return bindActionCreators({getUserData, getUserRepos}, dispatch);
+	return bindActionCreators({getUserData, getUserRepos, getUsers}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Github);

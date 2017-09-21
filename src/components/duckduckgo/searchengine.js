@@ -14,7 +14,6 @@ class SearchEngine extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log("this.state", this.state.text);
     this.props.onSubmit(this.state.text);
   }
 

@@ -90,6 +90,16 @@ export const getUserRepos = (url) => {
   }
 };
 
+export const getUsers = url => dispatch => {
+  return fetchJSONP(url).then(rawResponse => {
+    return rawResponse.json()
+  }).then(
+    jsonResponse => {
+      console.log("List of Users: ", jsonResponse);
+    }
+  );
+}
+
 /* Reminder Pro Reducers */
 
 export const addReminder = (text, dueDate) => {
