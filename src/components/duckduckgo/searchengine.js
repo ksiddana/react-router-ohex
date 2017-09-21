@@ -10,13 +10,12 @@ class SearchEngine extends React.Component {
     this.state = {
       text: ""
     }
-    this.searchItem = this.searchItem.bind(this);
   }
 
-  searchItem() {
+  onSubmit(e) {
+    e.preventDefault();
     console.log("this.state", this.state.text);
-    this.props.onSubmit(this.state.text)
-    this.setState({ text: ""})
+    this.props.onSubmit(this.state.text);
   }
 
   handleChange(ev) {
@@ -31,7 +30,7 @@ class SearchEngine extends React.Component {
     const { text } = this.state;
     return (
       <div className="container">
-        <form className="well" onSubmit={this.searchItem.bind(this)}>
+        <form className="well" onSubmit={this.onSubmit.bind(this)}>
           <label>Search something ...</label>
           <input
             type="text"
@@ -39,10 +38,6 @@ class SearchEngine extends React.Component {
             value={this.state.text}
             onChange={(ev) => this.handleChange(ev)}
           />
-          <Button
-            bsStyle="primary"
-            onClick={this.searchItem.bind(this)}
-          >Search</Button>
         </form>
 
         <div>
