@@ -18,7 +18,7 @@ class Profile extends React.Component {
       location,
       company,
 			html_url
-    } = this.props.githubData;
+    } = this.props.userData;
 
     return (
       <div className="panel panel-default">

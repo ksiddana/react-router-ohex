@@ -4,8 +4,7 @@
     "password": "",
     "database": "ohex_prod",
     "host": "127.0.01",
-    "dialect": "mysql",
-    "enable": false
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",
@@ -19,7 +18,6 @@
     "password": "",
     "database": "",
     "host": "",
-    "dialect": "",
-    "enable": true
+    "dialect": ""
   }
 }

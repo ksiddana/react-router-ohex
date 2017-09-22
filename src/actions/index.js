@@ -19,7 +19,8 @@ import {
   DELETE_REMINDER,
   CLEAR_REMINDERS,
   GET_GITHUB_USER_DATA,
-  GET_GITHUB_USER_REPOS
+  GET_GITHUB_USER_REPOS,
+  GET_GITHUB_NAMES
 } from './types';
 
 import GetAgeRange from '../../database/queries/GetAgeRange';
@@ -31,6 +32,10 @@ import EditArtist from '../../database/queries/EditArtist';
 import DeleteArtist from '../../database/queries/DeleteArtist';
 import SetRetired from '../../database/queries/SetRetired';
 import SetNotRetired from '../../database/queries/SetNotRetired';
+
+
+const GITHUB_CLIENT_ID = "839d4cfb190361af424f";
+const GITHUB_CLIENT_SECRET = "5aa7447b7e607dfd58f83735112e8eaa1071d214";
 
 /* OHEx Foot Items Reducer */
 
@@ -51,53 +56,57 @@ export function fetchFoodItems() {
 
 /* Github User Data */
 
-export const getUserData = (url) => {
-  console.log("Step 5. getUserData Action Creator API call:", url);
-  return dispatch => {
-    return fetchJSONP(url).then(response => {
-      return response.json();
-    }).then(
-      request => {
-        const githubAPI_Data = request.data;
-        console.log("Step 6. Fetching Github API Data: ", githubAPI_Data);
-        dispatch({
-          type: GET_GITHUB_USER_DATA,
-          payload: githubAPI_Data
-        });
-      },
-      error => {
-        console.log("Error: Retrieving API call", error);
-      });
-  }
-};
+export const getUserData = username => dispatch => {
 
-export const getUserRepos = (url) => {
-  console.log("Step 5. getUserRepos Action Creator API call:", url);
-  return dispatch => {
-    return fetchJSONP(url).then(response => {
-      return response.json();
-    }).then(
-      request => {
-        const githubAPI_Repo = request.data;
-        dispatch({
-          type: GET_GITHUB_USER_REPOS,
-          payload: githubAPI_Repo
-        });
-      },
-      error => {
-        console.log("Error: Retrieving User API call", error);
-      });
-  }
-};
+  const url = 'https://api.github.com/users/' + username + '?client_id=' + GITHUB_CLIENT_ID + '&client_secret=' + GITHUB_CLIENT_SECRET;
 
-export const getUsers = url => dispatch => {
   return fetchJSONP(url).then(rawResponse => {
-    return rawResponse.json()
-  }).then(
-    jsonResponse => {
-      console.log("List of Users: ", jsonResponse);
-    }
-  );
+    return rawResponse.json();
+  }).then(jsonResponse => {
+      dispatch({
+        type: GET_GITHUB_USER_DATA,
+        payload: jsonResponse.data
+      });
+  });
+};
+
+export const getUserRepos = (username) => dispatch => {
+
+  const url = 'https://api.github.com/users/' + username + '/repos?per_page=5&client_id=' + GITHUB_CLIENT_ID + '&client_secret=' + GITHUB_CLIENT_SECRET + '&sort=created';
+
+  console.log("USER REPOS URL:", url);
+
+  return fetchJSONP(url)
+    .then(rawResponse => {
+      return rawResponse.json()
+    })
+    .then(jsonResponse => {
+      dispatch({
+        type: GET_GITHUB_USER_REPOS,
+        repos: jsonResponse.data
+      });
+    });
+};
+
+export const getUsers = name => dispatch => {
+
+  const url = `https://api.github.com/search/users?q=${name}` + `+in%3Afullname&type=Users+&client_id=${GITHUB_CLIENT_ID}&client_secret=${GITHUB_CLIENT_SECRET}&sort=created&per_page=10`;
+
+  console.log("USERS URL:", url);
+
+  return fetchJSONP(url)
+    .then(rawResponse => {
+      return rawResponse.json()
+    })
+    .then(jsonResponse => {
+
+      console.log("NAMES:", jsonResponse);
+
+      dispatch({
+        type: GET_GITHUB_NAMES,
+        names: jsonResponse.data.items
+      })
+  });
 }
 
 /* Reminder Pro Reducers */

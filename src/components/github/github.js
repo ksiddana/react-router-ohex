@@ -5,6 +5,7 @@ import { getUserData, getUserRepos, getUsers } from '../../actions';
 import { bindActionCreators } from 'redux';
 import Profile from './profile';
 import Search from './search-user';
+import NameList from './name-list';
 
 const GITHUB_CLIENT_ID = "839d4cfb190361af424f";
 const GITHUB_CLIENT_SECRET = "5aa7447b7e607dfd58f83735112e8eaa1071d214";
@@ -12,71 +13,49 @@ const GITHUB_CLIENT_SECRET = "5aa7447b7e607dfd58f83735112e8eaa1071d214";
 class Github extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      username: "ksiddana",
-      userData: [],
-      userRepo: [],
-      perPage: 5
-    }
 
-    this.getUserData = this.getUserData.bind(this);
-    this.getUserRepos = this.getUserRepos.bind(this);
-  }
-
-  getUserData() {
-    console.log("Step 4. Github Component Calling the getUserData Props method");
-    const url = 'https://api.github.com/users/' + this.state.username + '?client_id=' + this.props.clientId + '&client_secret=' + this.props.clientSecret;
-
-    this.props.getUserData(url);
-  }
-
-  getUserRepos() {
-    const url = 'https://api.github.com/users/' + this.state.username + '/repos?per_page=' + this.state.perPage + '&client_id=' + this.props.clientId + '&client_secret=' + this.props.clientSecret + '&sort=created';
-                //  https://api.github.com/users/' + this.state.username + '/repos?per_page=' + this.state.perPage + '&client_id=' + this.props.clientId + '&client_secret=' + this.props.clientSecret + '&sort=created
-    this.props.getUserRepos(url);
-  }
-
-  getUsers() {
-    const url = 'https://api.github.com/search/users?q=karun' + '&client_id=' + this.props.clientId + '&client_secret=' + this.props.clientSecret + '&sort=created';
-    console.log("URL: ", url);
-
-    this.props.getUsers(url);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.searchByName = this.searchByName.bind(this);
   }
 
   handleFormSubmit(username) {
-    this.setState({username: username}, function() {
-      this.getUsers();
-      this.getUserData();
-      this.getUserRepos();
-    });
+    const { getUserData, getUserRepos } = this.props;
+    getUserData(username);
+    getUserRepos(username);
+  }
+
+  searchByName(name) {
+    const { getUsers } = this.props;
+    getUsers(name);
   }
 
   componentDidMount() {
-    console.log("Step 3. Github React Component ComponentDidMount")
-    this.getUserData();
-    // this.getUserRepos();
+    // this.getUserData();
   }
 
   render() {
-    const { githubData } = this.props;
-    console.log("Step 2 & 9. Github React Component renderMethod Invoked", this.props);
-    if (this.props.githubData) {
-      console.log("Step 10. Inside Render Method, with Data:", this.props.githubData);
-      console.log("\n\n------- END ---------\n\n");
-      return (
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <Search onFormSubmit={this.handleFormSubmit.bind(this)}/>
-              <br />
-              <Profile {...this.props}/>
-            </div>
+    const { userData, userRepos, names } = this.props;
+
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">
+            <Search
+              title="Search Github users"
+              onFormSubmit={this.handleFormSubmit}
+            />
+            <br />
+            <Search
+              title="Search Github users by name"
+              onFormSubmit={this.searchByName}
+            />
+            <br />
+            { userRepos.length && <Profile {...this.props}/> }
+            { names.length && <NameList names={names}/> }
           </div>
         </div>
-      )
-    } else {
-      return (<div>Loading Data ... or could not receive data</div>);
-    }
+      </div>
+    )
   }
 }
 
@@ -91,12 +70,10 @@ Github.defaultProps = {
 }
 
 const mapStateToProps = (state) => {
-  // You can deconstruct the state here
-  console.log("\n\n--------- START -----------\n\n");
-  console.log("Step 1 & 8. Github React Component mapStateToProps: ", state);
   return {
-    githubData: state.githubState.githubData,
-    userRepos: state.githubState.userRepos
+    userData: state.githubState.userData,
+    userRepos: state.githubState.userRepos,
+    names: state.githubState.names
   }
 }
 

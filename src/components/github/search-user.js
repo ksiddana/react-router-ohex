@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Search extends React.Component {
   constructor(props) {
@@ -17,15 +18,24 @@ class Search extends React.Component {
   }
 
   render() {
+    const { title } = this.props;
     return (
       <div>
         <form onSubmit={this.onSubmit.bind(this)}>
-          <label>Search Github users</label>
+          <label>{title}</label>
           <input type="text" ref="username" className="form-control" />
         </form>
       </div>
     )
   }
+}
+
+Search.propTypes = {
+  title: PropTypes.string
+}
+
+Search.defaultProps = {
+  title: "Title"
 }
 
 export default Search;
