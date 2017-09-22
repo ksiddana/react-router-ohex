@@ -2,11 +2,12 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const databaseConfig = require('dotenv').config();
+const env = require('dotenv').config();
 const port = process.env.PORT || 3000;
 const mysql = require('mysql');
+const config = require('./.config.json');
 
-console.log(".env file: ", databaseConfig);
+console.log(".env file: ", env);
 
 /*const connection = mysql.createPool({
     connectionLimit : 100, //important
@@ -19,14 +20,14 @@ console.log(".env file: ", databaseConfig);
 
 let connection;
 
-if (process.env.NODE_ENV !== 'production') {
-  const databaseConfig = require('./.config.json');
+if (process.env.NODE_ENV !== 'PRODUCTION' && config.test.enable) {
+  const config = require('./.config.json');
   connection = mysql.createPool({
     connectionLimit : 100, //important
     // host     : databaseConfig.test.host,
-    user     : databaseConfig.test.username,
+    user     : config.test.username,
     // password : databaseConfig.test.password,
-    database : databaseConfig.test.database,
+    database : config.test.database,
     debug    : false
   });
 
@@ -41,7 +42,9 @@ if (process.env.NODE_ENV !== 'production') {
     console.log("Connected with ID: ", connection.threadId);
     console.log("Connected to TEST Database !!!");
   });
-} else {
+}
+
+if (process.env.NODE_ENV === 'PRODUCTION' && config.production.enable) {
   connection = mysql.createPool({
     host     : process.env.CLEAR_DB_HOST,
     user     : process.env.CLEAR_DB_USERNAME,
@@ -78,7 +81,7 @@ function getAllMenuItems(req, res) {
   });
 }
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'PRODUCTION') {
 
   const webpackMiddleware = require('webpack-dev-middleware');
   const webpack = require('webpack');
@@ -86,7 +89,7 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(webpackMiddleware(webpack(webpackConfig)));
 
   app.listen(4000);
-  console.log('DEV ENV Listening at:', 4000);
+  console.log('DEV ENV server running at http://localhost:4000');
 
 } else {
   const static_path = path.join(__dirname, 'dist');
@@ -96,7 +99,7 @@ if (process.env.NODE_ENV !== 'production') {
   });
 
   app.listen(port);
-  console.log('PROD ENV Listening at:', port);
+  console.log('PROD ENV server running at http://localhost:' + port);
 }
 
 // Server routes...
