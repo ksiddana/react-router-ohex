@@ -2,7 +2,8 @@ import _ from 'lodash';
 import {
   GET_GITHUB_USER_DATA,
   GET_GITHUB_USER_REPOS,
-  GET_GITHUB_NAMES
+  GET_GITHUB_NAMES,
+  CLEAR_GITHUB_STATE
   } from '../actions/types';
 
 const initialState = {
@@ -24,6 +25,9 @@ const githubStateReducer = (state = initialState, action = {}) => {
 
     case GET_GITHUB_NAMES:
       return { ...state, names: action.names }
+
+    case CLEAR_GITHUB_STATE:
+      return { ...state, ...initialState }
 
     default:
       return state;

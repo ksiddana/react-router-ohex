@@ -20,7 +20,8 @@ import {
   CLEAR_REMINDERS,
   GET_GITHUB_USER_DATA,
   GET_GITHUB_USER_REPOS,
-  GET_GITHUB_NAMES
+  GET_GITHUB_NAMES,
+  CLEAR_GITHUB_STATE
 } from './types';
 
 import GetAgeRange from '../../database/queries/GetAgeRange';
@@ -45,11 +46,9 @@ export function fetchFoodItems() {
 
     return axios.get(url)
     .then(response => {
-      // console.log("All FOOD ITEMS:", response);
       dispatch({ type: FETCH_FOOD_ITEMS, payload: response.data });
     })
     .catch(error => {
-      // console.log("<ERROR:>", error);
     });
   };
 };
@@ -59,6 +58,8 @@ export function fetchFoodItems() {
 export const getUserData = username => dispatch => {
 
   const url = 'https://api.github.com/users/' + username + '?client_id=' + GITHUB_CLIENT_ID + '&client_secret=' + GITHUB_CLIENT_SECRET;
+
+  dispatch({ type: CLEAR_GITHUB_STATE });
 
   return fetchJSONP(url).then(rawResponse => {
     return rawResponse.json();
@@ -74,8 +75,6 @@ export const getUserRepos = (username) => dispatch => {
 
   const url = 'https://api.github.com/users/' + username + '/repos?per_page=5&client_id=' + GITHUB_CLIENT_ID + '&client_secret=' + GITHUB_CLIENT_SECRET + '&sort=created';
 
-  console.log("USER REPOS URL:", url);
-
   return fetchJSONP(url)
     .then(rawResponse => {
       return rawResponse.json()
@@ -90,18 +89,17 @@ export const getUserRepos = (username) => dispatch => {
 
 export const getUsers = name => dispatch => {
 
-  const url = `https://api.github.com/search/users?q=${name}` + `+in%3Afullname&type=Users+&client_id=${GITHUB_CLIENT_ID}&client_secret=${GITHUB_CLIENT_SECRET}&sort=created&per_page=10`;
+  dispatch({ type: CLEAR_GITHUB_STATE });
 
-  console.log("USERS URL:", url);
+  const url = `https://api.github.com/search/users?q=${name}` + `+in%3Afullname&location=California&type=Users+&client_id=${GITHUB_CLIENT_ID}&client_secret=${GITHUB_CLIENT_SECRET}&sort=created&per_page=10`;
+
+  console.log("USER URL: ", url);
 
   return fetchJSONP(url)
     .then(rawResponse => {
       return rawResponse.json()
     })
     .then(jsonResponse => {
-
-      console.log("NAMES:", jsonResponse);
-
       dispatch({
         type: GET_GITHUB_NAMES,
         names: jsonResponse.data.items
