@@ -19,7 +19,7 @@ const config = require('./.config.json');
 
 let connection;
 
-if (process.env.NODE_ENV !== 'PRODUCTION' && config.test.enable) {
+if (process.env.NODE_ENV !== 'production' && config.test.enable) {
   const env = require('dotenv').config();
   const config = require('./.config.json');
   connection = mysql.createPool({
@@ -44,7 +44,7 @@ if (process.env.NODE_ENV !== 'PRODUCTION' && config.test.enable) {
   });
 }
 
-if (process.env.NODE_ENV === 'PRODUCTION' && config.production.enable) {
+if (process.env.NODE_ENV === 'production' && config.production.enable) {
   connection = mysql.createPool({
     host     : process.env.CLEAR_DB_HOST,
     user     : process.env.CLEAR_DB_USERNAME,
@@ -81,7 +81,7 @@ function getAllMenuItems(req, res) {
   });
 }
 
-if (process.env.NODE_ENV !== 'PRODUCTION') {
+if (process.env.NODE_ENV !== 'production') {
 
   const webpackMiddleware = require('webpack-dev-middleware');
   const webpack = require('webpack');
