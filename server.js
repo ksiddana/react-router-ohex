@@ -2,12 +2,11 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const env = require('dotenv').config();
 const port = process.env.PORT || 3000;
 const mysql = require('mysql');
 const config = require('./.config.json');
 
-console.log(".env file: ", env);
+// console.log(".env file: ", env);
 
 /*const connection = mysql.createPool({
     connectionLimit : 100, //important
@@ -21,6 +20,7 @@ console.log(".env file: ", env);
 let connection;
 
 if (process.env.NODE_ENV !== 'PRODUCTION' && config.test.enable) {
+  const env = require('dotenv').config();
   const config = require('./.config.json');
   connection = mysql.createPool({
     connectionLimit : 100, //important
